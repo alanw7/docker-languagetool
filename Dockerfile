@@ -1,6 +1,6 @@
 ARG LANGUAGETOOL_VERSION=6.2
 
-FROM debian:bullseye as build
+FROM debian:bookworm as build
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -51,7 +51,7 @@ WORKDIR /languagetool
 
 # Note: When changing the base image, verify that the hunspell.sh workaround is
 # downloading the matching version of `libhunspell`. The URL may need to change.
-FROM alpine:3.17.3
+FROM alpine:3.18.2
 
 RUN apk add --no-cache \
     bash \
