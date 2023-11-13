@@ -14,7 +14,6 @@ RUN apt-get update -y \
     maven \
     unzip \
     xmlstarlet \
-
     # packages required for arm64-workaround
     build-essential \
     cmake \
@@ -68,6 +67,14 @@ RUN addgroup -S languagetool && adduser -S languagetool -G languagetool
 COPY --chown=languagetool --from=build /dist .
 
 WORKDIR /LanguageTool
+
+# Add words to extend spell checking
+COPY resources/en/spelling.txt /tmp/spelling.txt
+RUN cat /tmp/spelling.txt >> ./org/languagetool/resource/en/hunspell/spelling.txt
+
+# Add words to skip spell checking
+COPY resources/en/ignore.txt /tmp/ignore.txt
+RUN cat /tmp/ignore.txt >> ./org/languagetool/resource/en/hunspell/ignore.txt
 
 RUN mkdir /nonexistent && touch /nonexistent/.languagetool.cfg
 
