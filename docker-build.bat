@@ -1,1 +1,1 @@
-docker build --build-arg LANGUAGETOOL_VERSION=6.2 -t language-tool:v6.2-custom .
+docker build --build-arg LANGUAGETOOL_VERSION=6.3-branch -t language-tool:v6.3-custom .
